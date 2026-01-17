@@ -14,7 +14,7 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.network.protocol.game.ServerboundInteractPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.Boat;
 
 public class BoatGlitch extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -23,15 +23,13 @@ public class BoatGlitch extends Module {
             .name("toggle-after")
             .description("Disables the module when finished.")
             .defaultValue(true)
-            .build()
-    );
+            .build());
 
     private final Setting<Boolean> remount = sgGeneral.add(new BoolSetting.Builder()
             .name("remount")
             .description("Remounts the boat when finished.")
             .defaultValue(true)
-            .build()
-    );
+            .build());
 
     private Entity boat = null;
     private int dismountTicks = 0;
@@ -40,7 +38,8 @@ public class BoatGlitch extends Module {
     private boolean boatPhaseEnabled;
 
     public BoatGlitch() {
-        super(MeteorRejectsAddon.CATEGORY, "boat-glitch", "Glitches your boat into the block beneath you.  Dismount to trigger.");
+        super(MeteorRejectsAddon.CATEGORY, "boat-glitch",
+                "Glitches your boat into the block beneath you.  Dismount to trigger.");
     }
 
     @Override
@@ -52,8 +51,7 @@ public class BoatGlitch extends Module {
         if (Modules.get().isActive(BoatPhase.class)) {
             boatPhaseEnabled = true;
             Modules.get().get(BoatPhase.class).toggle();
-        }
-        else {
+        } else {
             boatPhaseEnabled = false;
         }
     }
@@ -78,14 +76,13 @@ public class BoatGlitch extends Module {
                 }
                 if (mc.player.getVehicle() != null && event.boat == mc.player.getVehicle()) {
                     boat = event.boat;
-                }
-                else {
+                } else {
                     boat = null;
                 }
             }
             if (boat != null) {
                 boat.noPhysics = true;
-                //boat.pushSpeedReduction = 1;
+                // boat.pushSpeedReduction = 1;
                 dismountTicks = 5;
             }
         }
@@ -100,8 +97,7 @@ public class BoatGlitch extends Module {
                     boat.noPhysics = false;
                     if (toggleAfter.get() && !remount.get()) {
                         toggle();
-                    }
-                    else if (remount.get()) {
+                    } else if (remount.get()) {
                         remountTicks = 5;
                     }
                 }
@@ -111,16 +107,18 @@ public class BoatGlitch extends Module {
         if (remountTicks > 0) {
             remountTicks--;
             if (remountTicks == 0) {
-                mc.getConnection().send( ServerboundInteractPacket.createInteractionPacket(boat, false, InteractionHand.MAIN_HAND));
+                mc.getConnection().send(
+                        ServerboundInteractPacket.createInteractionPacket(boat, false, InteractionHand.MAIN_HAND));
                 if (toggleAfter.get()) {
                     toggle();
                 }
             }
         }
     }
+
     @EventHandler
     private void onKey(KeyEvent event) {
-        if (event.key() == mc.options.keyShift.getDefaultKey().getValue() && event.action == KeyAction.Press) {
+        if (event.key == mc.options.keyShift.getDefaultKey().getValue() && event.action == KeyAction.Press) {
             if (mc.player.getVehicle() != null && mc.player.getVehicle() instanceof Boat) {
                 dontPhase = false;
                 boat = null;

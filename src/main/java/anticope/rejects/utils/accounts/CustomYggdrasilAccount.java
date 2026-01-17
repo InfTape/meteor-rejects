@@ -38,9 +38,11 @@ public class CustomYggdrasilAccount extends Account<CustomYggdrasilAccount> {
     @Override
     public boolean login() {
         try {
-            CustomYggdrasilLogin.LocalYggdrasilAuthenticationService service = new CustomYggdrasilLogin.LocalYggdrasilAuthenticationService(java.net.Proxy.NO_PROXY, server);
-            MinecraftSessionService sessService = new CustomYggdrasilLogin.LocalYggdrasilMinecraftSessionService(service, service.server);
-            applyLoginEnvironment(service);
+            CustomYggdrasilLogin.LocalYggdrasilAuthenticationService service = new CustomYggdrasilLogin.LocalYggdrasilAuthenticationService(
+                    java.net.Proxy.NO_PROXY, server);
+            MinecraftSessionService sessService = new CustomYggdrasilLogin.LocalYggdrasilMinecraftSessionService(
+                    service, service.server);
+            applyLoginEnvironment(service, sessService);
 
             User session = CustomYggdrasilLogin.login(name, password, server);
             setSession(session);
@@ -50,7 +52,8 @@ public class CustomYggdrasilAccount extends Account<CustomYggdrasilAccount> {
         } catch (AuthenticationException e) {
             if (e.getMessage().contains("Invalid username or password") || e.getMessage().contains("account migrated"))
                 MeteorRejectsAddon.LOG.error("Wrong password.");
-            else MeteorRejectsAddon.LOG.error("Failed to contact the authentication server.");
+            else
+                MeteorRejectsAddon.LOG.error("Failed to contact the authentication server.");
             return false;
         }
     }
@@ -68,7 +71,8 @@ public class CustomYggdrasilAccount extends Account<CustomYggdrasilAccount> {
     @Override
     public CustomYggdrasilAccount fromTag(CompoundTag tag) {
         super.fromTag(tag);
-        if (!tag.contains("password")) throw new NbtException();
+        if (!tag.contains("password"))
+            throw new NbtException();
 
         password = tag.getString("password").orElse("");
         server = tag.getString("server").orElse("");
@@ -78,7 +82,8 @@ public class CustomYggdrasilAccount extends Account<CustomYggdrasilAccount> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof CustomYggdrasilAccount)) return false;
+        if (!(o instanceof CustomYggdrasilAccount))
+            return false;
         return ((CustomYggdrasilAccount) o).name.equals(this.name);
     }
 }

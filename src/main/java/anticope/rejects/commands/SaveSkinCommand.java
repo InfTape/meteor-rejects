@@ -25,7 +25,8 @@ import java.util.UUID;
 
 public class SaveSkinCommand extends Command {
 
-    private final static SimpleCommandExceptionType IO_EXCEPTION = new SimpleCommandExceptionType(Component.literal("An exception occurred"));
+    private final static SimpleCommandExceptionType IO_EXCEPTION = new SimpleCommandExceptionType(
+            Component.literal("An exception occurred"));
 
     private final PointerBuffer filters;
     private final Gson GSON = new Gson();
@@ -44,11 +45,13 @@ public class SaveSkinCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<SharedSuggestionProvider> builder) {
         builder.then(argument("player", PlayerListEntryArgumentType.create()).executes(ctx -> {
-            UUID id = PlayerListEntryArgumentType.get(ctx).getProfile().id();
+            UUID id = PlayerListEntryArgumentType.get(ctx).getProfile().getId();
             String path = TinyFileDialogs.tinyfd_saveFileDialog("Save image", null, filters, null);
-            if (path == null) IO_EXCEPTION.create();
+            if (path == null)
+                IO_EXCEPTION.create();
             if (path != null) {
-                if (!path.endsWith(".png")) path += ".png";
+                if (!path.endsWith(".png"))
+                    path += ".png";
                 saveSkin(id.toString(), path);
             }
 
@@ -58,18 +61,19 @@ public class SaveSkinCommand extends Command {
 
     private void saveSkin(String uuid, String path) throws CommandSyntaxException {
         try {
-            //going to explain what happens so I don't forget
-            //request their minecraft profile, all so we can get a base64 encoded string that contains ANOTHER json that then has the skin URL
+            // going to explain what happens so I don't forget
+            // request their minecraft profile, all so we can get a base64 encoded string
+            // that contains ANOTHER json that then has the skin URL
             String PROFILE_REQUEST_URL = "https://sessionserver.mojang.com/session/minecraft/profile/%s";
 
             JsonObject object = Http.get(String.format(PROFILE_REQUEST_URL, uuid)).sendJson(JsonObject.class);
-            //Get the properties array which has what we need
+            // Get the properties array which has what we need
             JsonArray array = object.getAsJsonArray("properties");
             JsonObject property = array.get(0).getAsJsonObject();
-            //value is what we grab but it's encoded so we have to decode it
+            // value is what we grab but it's encoded so we have to decode it
             String base64String = property.get("value").getAsString();
             byte[] bs = Base64.decodeBase64(base64String);
-            //Convert the response to json and pull the skin url from there
+            // Convert the response to json and pull the skin url from there
             String secondResponse = new String(bs, StandardCharsets.UTF_8);
             JsonObject finalResponseObject = GSON.fromJson(secondResponse, JsonObject.class);
             JsonObject texturesObject = finalResponseObject.getAsJsonObject("textures");

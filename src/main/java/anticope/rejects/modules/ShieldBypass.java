@@ -2,7 +2,7 @@ package anticope.rejects.modules;
 
 import anticope.rejects.MeteorRejectsAddon;
 import meteordevelopment.meteorclient.events.Cancellable;
-import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
+import meteordevelopment.meteorclient.events.meteor.MouseButtonEvent;
 import meteordevelopment.meteorclient.settings.BoolSetting;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
@@ -30,17 +30,19 @@ public class ShieldBypass extends Module {
             .name("ignore-axe")
             .description("Ignore if you are holding an axe.")
             .defaultValue(true)
-            .build()
-    );
+            .build());
 
     public ShieldBypass() {
-        super(MeteorRejectsAddon.CATEGORY, "shield-bypass", "Attempts to teleport you behind enemies to bypass shields.");
+        super(MeteorRejectsAddon.CATEGORY, "shield-bypass",
+                "Attempts to teleport you behind enemies to bypass shields.");
     }
 
     @EventHandler
-    private void onMouseButton(MouseClickEvent event) {
-        if (Modules.get().isActive(KillAura.class)) return;
-        if (mc.screen == null && !mc.player.isUsingItem() && event.action == KeyAction.Press && event.button() == GLFW_MOUSE_BUTTON_LEFT) {
+    private void onMouseButton(MouseButtonEvent event) {
+        if (Modules.get().isActive(KillAura.class))
+            return;
+        if (mc.screen == null && !mc.player.isUsingItem() && event.action == KeyAction.Press
+                && event.button == GLFW_MOUSE_BUTTON_LEFT) {
             if (mc.hitResult instanceof EntityHitResult result) {
                 bypass(result.getEntity(), event);
             }
@@ -55,11 +57,13 @@ public class ShieldBypass extends Module {
 
     public void bypass(Entity target, Cancellable event) {
         if (target instanceof LivingEntity e && e.isBlocking()) {
-            if (ignoreAxe.get() && InvUtils.testInMainHand(i -> i.getItem() instanceof AxeItem)) return;
+            if (ignoreAxe.get() && InvUtils.testInMainHand(i -> i.getItem() instanceof AxeItem))
+                return;
 
             // Shield check
             Vec3 playerPos = new Vec3(mc.player.getX(), mc.player.getY(), mc.player.getZ());
-            if (isBlocked(playerPos, e)) return;
+            if (isBlocked(playerPos, e))
+                return;
 
             Vec3 offset = Vec3.directionFromRotation(0, mc.player.getYRot()).normalize().scale(2);
             Vec3 ePos = new Vec3(e.getX(), e.getY(), e.getZ());
@@ -70,7 +74,8 @@ public class ShieldBypass extends Module {
             for (float i = 0; i < 4; i += 0.25) {
                 Vec3 targetPos = newPos.add(0, i, 0);
 
-                boolean collides = !mc.level.noCollision(null, e.getBoundingBox().move(offset).move(targetPos.subtract(newPos)));
+                boolean collides = !mc.level.noCollision(null,
+                        e.getBoundingBox().move(offset).move(targetPos.subtract(newPos)));
 
                 if (!inside && collides) {
                     inside = true;
@@ -80,17 +85,20 @@ public class ShieldBypass extends Module {
                 }
             }
 
-            if (!isBlocked(newPos, e)) return;
+            if (!isBlocked(newPos, e))
+                return;
 
             event.cancel();
 
-            mc.getConnection().send(new ServerboundMovePlayerPacket.Pos(newPos.x(), newPos.y(), newPos.z(), true, false));
+            mc.getConnection()
+                    .send(new ServerboundMovePlayerPacket.Pos(newPos.x(), newPos.y(), newPos.z(), true, false));
 
             mc.getConnection().send(ServerboundInteractPacket.createAttackPacket(e, mc.player.isShiftKeyDown()));
             mc.getConnection().send(new ServerboundSwingPacket(mc.player.getUsedItemHand()));
-            mc.player.resetOnlyAttackStrengthTicker();
+            mc.player.resetAttackStrengthTicker();
 
-            mc.getConnection().send(new ServerboundMovePlayerPacket.Pos(mc.player.getX(), mc.player.getY(), mc.player.getZ(), true, mc.player.horizontalCollision));
+            mc.getConnection().send(new ServerboundMovePlayerPacket.Pos(mc.player.getX(), mc.player.getY(),
+                    mc.player.getZ(), true, mc.player.horizontalCollision));
         }
     }
 }

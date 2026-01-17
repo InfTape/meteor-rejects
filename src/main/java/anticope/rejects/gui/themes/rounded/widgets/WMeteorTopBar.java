@@ -71,25 +71,28 @@ public class WMeteorTopBar extends WTopBar implements MeteorWidget {
                 double mouseY = mc.mouseHandler.ypos();
 
                 tab.openScreen(theme);
-                glfwSetCursorPos(mc.getWindow().handle(), mouseX, mouseY);
+                glfwSetCursorPos(mc.getWindow().getWindow(), mouseX, mouseY);
             }
         }
 
         @Override
         protected void onRender(GuiRenderer renderer, double mouseX, double mouseY, double delta) {
             double pad = pad();
-            Color color = getButtonColor(pressed || (mc.screen instanceof TabScreen && ((TabScreen) mc.screen).tab == tab), mouseOver);
+            Color color = getButtonColor(
+                    pressed || (mc.screen instanceof TabScreen && ((TabScreen) mc.screen).tab == tab), mouseOver);
 
-            //renderer.quad(x, y, width, height, color);
+            // renderer.quad(x, y, width, height, color);
             switch (getState(this)) {
                 case 1:
-                    GuiUtils.quadRoundedSide(renderer, this, color, ((MeteorRoundedGuiTheme)theme).roundAmount(), false);
+                    GuiUtils.quadRoundedSide(renderer, this, color, ((MeteorRoundedGuiTheme) theme).roundAmount(),
+                            false);
                     break;
                 case 2:
-                    GuiUtils.quadRoundedSide(renderer, this, color, ((MeteorRoundedGuiTheme)theme).roundAmount(), true);
+                    GuiUtils.quadRoundedSide(renderer, this, color, ((MeteorRoundedGuiTheme) theme).roundAmount(),
+                            true);
                     break;
                 case 3:
-                    GuiUtils.quadRounded(renderer, this, color, ((MeteorRoundedGuiTheme)theme).roundAmount());
+                    GuiUtils.quadRounded(renderer, this, color, ((MeteorRoundedGuiTheme) theme).roundAmount());
                     break;
                 default:
                     renderer.quad(this, color);

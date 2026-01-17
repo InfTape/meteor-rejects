@@ -12,7 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,8 +40,7 @@ public class AutoSoup extends Module {
             .min(0.5)
             .sliderMin(0.5)
             .sliderMax(9.5)
-            .build()
-    );
+            .build());
 
     private int oldSlot = -1;
 

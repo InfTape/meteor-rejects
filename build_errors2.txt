@@ -1,0 +1,44 @@
+﻿
+> Configure project :
+Fabric Loom: 1.14.10
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 21
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure12.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:21)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:21)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 22
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure13.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:22)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:22)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 23
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure14.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:23)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:23)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 24
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure15.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:24)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:24)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 25
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure16.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:25)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:25)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle': line 26
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3$_closure17.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:26)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_2ng9uz800aiiq79cxjld3ep8d$_run_closure3.doCall$original(C:\Users\sam\IdeaProjects\meteor-rejects\build.gradle:26)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/sam/IdeaProjects/meteor-rejects/build/reports/problems/problems-report.html
+1 actionable task: 1 executed

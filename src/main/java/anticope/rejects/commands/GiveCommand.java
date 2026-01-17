@@ -14,12 +14,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.TypedEntityData;
 import java.util.Collection;
 
 import static anticope.rejects.utils.accounts.GetPlayerUUID.getUUID;
@@ -44,9 +42,8 @@ public class GiveCommand extends Command {
                 ct.putInt("Time", 1);
                 ct.putString("id", "minecraft:falling_block");
                 ct.put("BlockState", new CompoundTag());
-                ct.getCompound("BlockState").ifPresent(compound ->
-                    compound.put("Name", net.minecraft.nbt.StringTag.valueOf(BuiltInRegistries.ITEM.getKey(inHand.getItem()).toString()))
-                );
+                ct.getCompound("BlockState").ifPresent(compound -> compound.put("Name", net.minecraft.nbt.StringTag
+                        .valueOf(BuiltInRegistries.ITEM.getKey(inHand.getItem()).toString())));
 
             } else {
                 ct.putString("id", "minecraft:item");
@@ -70,17 +67,17 @@ public class GiveCommand extends Command {
         }));
 
         builder.then(literal("holo")
-            .then(argument("message", StringArgumentType.greedyString()).executes(ctx -> {
-                String message = ctx.getArgument("message", String.class).replace("&", "\247");
-                return createHolo(message, mc.player.getX(), mc.player.getY(), mc.player.getZ());
-            }))
-            .then(argument("pos", anticope.rejects.arguments.ClientPosArgumentType.pos())
                 .then(argument("message", StringArgumentType.greedyString()).executes(ctx -> {
                     String message = ctx.getArgument("message", String.class).replace("&", "\247");
-                    net.minecraft.world.phys.Vec3 pos = anticope.rejects.arguments.ClientPosArgumentType.getPos(ctx, "pos");
-                    return createHolo(message, pos.x, pos.y, pos.z);
-                })))
-        );
+                    return createHolo(message, mc.player.getX(), mc.player.getY(), mc.player.getZ());
+                }))
+                .then(argument("pos", anticope.rejects.arguments.ClientPosArgumentType.pos())
+                        .then(argument("message", StringArgumentType.greedyString()).executes(ctx -> {
+                            String message = ctx.getArgument("message", String.class).replace("&", "\247");
+                            net.minecraft.world.phys.Vec3 pos = anticope.rejects.arguments.ClientPosArgumentType
+                                    .getPos(ctx, "pos");
+                            return createHolo(message, pos.x, pos.y, pos.z);
+                        }))));
 
         builder.then(literal("bossbar").then(argument("message", StringArgumentType.greedyString()).executes(ctx -> {
             String message = ctx.getArgument("message", String.class).replace("&", "\247");
@@ -104,7 +101,7 @@ public class GiveCommand extends Command {
 
             var changes = DataComponentPatch.builder()
                     .set(DataComponents.CUSTOM_NAME, Component.literal(message))
-                    .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.WITHER, tag))
+                    .set(DataComponents.ENTITY_DATA, CustomData.of(tag))
                     .build();
             stack.applyComponentsAndValidate(changes);
 
@@ -118,7 +115,9 @@ public class GiveCommand extends Command {
             ItemStack itemStack = new ItemStack(Items.PLAYER_HEAD);
 
             var changes = DataComponentPatch.builder()
-                    .set(DataComponents.PROFILE, net.minecraft.world.item.component.ResolvableProfile.createResolved(new GameProfile(getUUID(playerName), playerName)))
+                    .set(DataComponents.PROFILE,
+                            new net.minecraft.world.item.component.ResolvableProfile(
+                                    new GameProfile(getUUID(playerName), playerName)))
                     .build();
 
             itemStack.applyComponentsAndValidate(changes);
@@ -134,7 +133,8 @@ public class GiveCommand extends Command {
         })));
     }
 
-    private int createHolo(String message, double x, double y, double z) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+    private int createHolo(String message, double x, double y, double z)
+            throws com.mojang.brigadier.exceptions.CommandSyntaxException {
         ItemStack stack = new ItemStack(Items.STRIDER_SPAWN_EGG);
         CompoundTag tag = new CompoundTag();
         ListTag pos = new ListTag();
@@ -151,7 +151,7 @@ public class GiveCommand extends Command {
 
         var changes = DataComponentPatch.builder()
                 .set(DataComponents.CUSTOM_NAME, Component.literal(message))
-                .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.ARMOR_STAND, tag))
+                .set(DataComponents.ENTITY_DATA, CustomData.of(tag))
                 .build();
 
         stack.applyComponentsAndValidate(changes);

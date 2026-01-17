@@ -26,22 +26,19 @@ public class AntiVanish extends Module {
             .defaultValue(100)
             .min(0)
             .sliderMax(300)
-            .build()
-    );
+            .build());
 
     private final Setting<Mode> mode = sgGeneral.add(new EnumSetting.Builder<Mode>()
             .name("mode")
             .defaultValue(Mode.LeaveMessage)
-            .build()
-    );
+            .build());
 
     private final Setting<String> command = sgGeneral.add(new StringSetting.Builder()
             .name("command")
             .description("The completion command to detect player names.")
             .defaultValue("minecraft:msg")
             .visible(() -> mode.get() == Mode.RealJoinMessage)
-            .build()
-    );
+            .build());
 
     private Map<UUID, String> playerCache = new HashMap<>();
     private final List<String> messageCache = new ArrayList<>();
@@ -81,23 +78,31 @@ public class AntiVanish extends Module {
                         .map(Suggestion::getText)
                         .toList();
 
-                if (lastUsernames.isEmpty()) return;
+                if (lastUsernames.isEmpty())
+                    return;
 
-                Predicate<String> joinedOrQuit = playerName -> lastUsernames.contains(playerName) != completionPlayerCache.contains(playerName);
+                Predicate<String> joinedOrQuit = playerName -> lastUsernames
+                        .contains(playerName) != completionPlayerCache.contains(playerName);
 
                 for (String playerName : completionPlayerCache) {
-                    if (Objects.equals(playerName, mc.player.getName().getString())) continue;
-                    if (playerName.contains(" ")) continue;
-                    if (playerName.length() < 3 || playerName.length() > 16) continue;
+                    if (Objects.equals(playerName, mc.player.getName().getString()))
+                        continue;
+                    if (playerName.contains(" "))
+                        continue;
+                    if (playerName.length() < 3 || playerName.length() > 16)
+                        continue;
                     if (joinedOrQuit.test(playerName)) {
                         info("Player joined: " + playerName);
                     }
                 }
 
                 for (String playerName : lastUsernames) {
-                    if (Objects.equals(playerName, mc.player.getName().getString())) continue;
-                    if (playerName.contains(" ")) continue;
-                    if (playerName.length() < 3 || playerName.length() > 16) continue;
+                    if (Objects.equals(playerName, mc.player.getName().getString()))
+                        continue;
+                    if (playerName.contains(" "))
+                        continue;
+                    if (playerName.length() < 3 || playerName.length() > 16)
+                        continue;
                     if (joinedOrQuit.test(playerName)) {
                         info("Player left: " + playerName);
                     }
@@ -117,18 +122,23 @@ public class AntiVanish extends Module {
     @EventHandler
     private void onTick(TickEvent.Post event) {
         timer++;
-        if (timer < interval.get()) return;
+        if (timer < interval.get())
+            return;
 
         switch (mode.get()) {
             case LeaveMessage -> {
                 Map<UUID, String> oldPlayers = Map.copyOf(playerCache);
-                playerCache = mc.getConnection().getOnlinePlayers().stream().collect(Collectors.toMap(e -> e.getProfile().id(), e -> e.getProfile().name()));
+                playerCache = mc.getConnection().getOnlinePlayers().stream()
+                        .collect(Collectors.toMap(e -> e.getProfile().getId(), e -> e.getProfile().getName()));
 
                 for (UUID uuid : oldPlayers.keySet()) {
-                    if (playerCache.containsKey(uuid)) continue;
+                    if (playerCache.containsKey(uuid))
+                        continue;
                     String name = oldPlayers.get(uuid);
-                    if (name.contains(" ")) continue;
-                    if (name.length() < 3 || name.length() > 16) continue;
+                    if (name.contains(" "))
+                        continue;
+                    if (name.length() < 3 || name.length() > 16)
+                        continue;
                     if (messageCache.stream().noneMatch(s -> s.contains(name))) {
                         warning(name + " has gone into vanish.");
                     }
@@ -146,6 +156,6 @@ public class AntiVanish extends Module {
 
     public enum Mode {
         LeaveMessage,
-        RealJoinMessage//https://github.com/xtrm-en/meteor-antistaff/blob/main/src/main/java/me/xtrm/meteorclient/antistaff/modules/AntiStaff.java
+        RealJoinMessage// https://github.com/xtrm-en/meteor-antistaff/blob/main/src/main/java/me/xtrm/meteorclient/antistaff/modules/AntiStaff.java
     }
 }

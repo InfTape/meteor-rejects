@@ -15,9 +15,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.attribute.EnvironmentAttributes;
+
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,16 +33,14 @@ public class AutoExtinguish extends Module {
             .name("extinguish")
             .description("Automatically extinguishes fire around you.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
     private final Setting<Integer> horizontalRadius = sgGeneral.add(new IntSetting.Builder()
             .name("horizontal-radius")
             .description("Horizontal radius in which to search for fire.")
             .defaultValue(4)
             .min(0)
             .sliderMax(6)
-            .build()
-    );
+            .build());
 
     private final Setting<Integer> verticalRadius = sgGeneral.add(new IntSetting.Builder()
             .name("vertical-radius")
@@ -50,40 +48,36 @@ public class AutoExtinguish extends Module {
             .defaultValue(4)
             .min(0)
             .sliderMax(6)
-            .build()
-    );
+            .build());
     private final Setting<Integer> maxBlockPerTick = sgGeneral.add(new IntSetting.Builder()
             .name("block-per-tick")
             .description("Maximum amount of Blocks to extinguish per tick.")
             .defaultValue(5)
             .min(1)
             .sliderMax(50)
-            .build()
-    );
+            .build());
     private final Setting<Boolean> waterBucket = sgBucket.add(new BoolSetting.Builder()
             .name("water")
             .description("Automatically places water when you are on fire (and don't have fire resistance).")
             .defaultValue(false)
-            .build()
-    );
+            .build());
     private final Setting<Boolean> center = sgBucket.add(new BoolSetting.Builder()
             .name("center")
             .description("Automatically centers you when placing water.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
     private final Setting<Boolean> onGround = sgBucket.add(new BoolSetting.Builder()
             .name("on-ground")
             .description("Only place when you are on ground.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
 
     private boolean hasPlacedWater = false;
     private BlockPos blockPos = null;
     private boolean doesWaterBucketWork = true;
 
-    private static final MobEffect FIRE_RESISTANCE = BuiltInRegistries.MOB_EFFECT.getValue(Identifier.parse("fire_resistance"));
+    private static final MobEffect FIRE_RESISTANCE = BuiltInRegistries.MOB_EFFECT
+            .getValue(ResourceLocation.parse("fire_resistance"));
 
     public AutoExtinguish() {
         super(MeteorRejectsAddon.CATEGORY, "auto-extinguish", "Automatically extinguishes fire around you");
@@ -91,7 +85,7 @@ public class AutoExtinguish extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {
-        if (mc.level.dimensionType().attributes().applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)) {
+        if (mc.level.dimensionType().ultraWarm()) {
             if (doesWaterBucketWork) {
                 warning("Water Buckets don't work in this dimension!");
                 doesWaterBucketWork = false;
@@ -114,19 +108,23 @@ public class AutoExtinguish extends Module {
                 place(slot);
                 hasPlacedWater = false;
 
-            } else if (!mc.player.hasEffect(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(FIRE_RESISTANCE)) && mc.player.isOnFire()) {
+            } else if (!mc.player.hasEffect(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(FIRE_RESISTANCE))
+                    && mc.player.isOnFire()) {
                 blockPos = mc.player.blockPosition();
                 final int slot = findSlot(Items.WATER_BUCKET);
-                if (mc.level.getBlockState(blockPos).getBlock() == Blocks.FIRE || mc.level.getBlockState(blockPos).getBlock() == Blocks.SOUL_FIRE) {
-                    float yaw = mc.gameRenderer.getMainCamera().yRot() % 360;
-                    float pitch = mc.gameRenderer.getMainCamera().xRot() % 360;
+                if (mc.level.getBlockState(blockPos).getBlock() == Blocks.FIRE
+                        || mc.level.getBlockState(blockPos).getBlock() == Blocks.SOUL_FIRE) {
+                    float yaw = mc.gameRenderer.getMainCamera().getYRot() % 360;
+                    float pitch = mc.gameRenderer.getMainCamera().getXRot() % 360;
                     if (center.get()) {
                         PlayerUtils.centerPlayer();
                     }
                     Rotations.rotate(yaw, 90);
-                    mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, blockPos, Direction.UP));
+                    mc.getConnection().send(new ServerboundPlayerActionPacket(
+                            ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, blockPos, Direction.UP));
                     mc.player.swing(InteractionHand.MAIN_HAND);
-                    mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK, blockPos, Direction.UP));
+                    mc.getConnection().send(new ServerboundPlayerActionPacket(
+                            ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK, blockPos, Direction.UP));
 
                     Rotations.rotate(yaw, pitch);
                 }
@@ -139,7 +137,8 @@ public class AutoExtinguish extends Module {
             AtomicInteger blocksPerTick = new AtomicInteger();
             BlockIterator.register(horizontalRadius.get(), verticalRadius.get(), (blockPos, blockState) -> {
                 if (blocksPerTick.get() <= maxBlockPerTick.get()) {
-                    if (blockState.getBlock() == Blocks.FIRE || mc.level.getBlockState(blockPos).getBlock() == Blocks.SOUL_FIRE) {
+                    if (blockState.getBlock() == Blocks.FIRE
+                            || mc.level.getBlockState(blockPos).getBlock() == Blocks.SOUL_FIRE) {
                         extinguishFire(blockPos);
                         blocksPerTick.getAndIncrement();
                     }
@@ -155,8 +154,8 @@ public class AutoExtinguish extends Module {
                 PlayerUtils.centerPlayer();
             }
             mc.player.getInventory().setSelectedSlot(slot);
-            float yaw = mc.gameRenderer.getMainCamera().yRot() % 360;
-            float pitch = mc.gameRenderer.getMainCamera().xRot() % 360;
+            float yaw = mc.gameRenderer.getMainCamera().getYRot() % 360;
+            float pitch = mc.gameRenderer.getMainCamera().getXRot() % 360;
 
             Rotations.rotate(yaw, 90);
             mc.gameMode.useItem(mc.player, InteractionHand.MAIN_HAND);
@@ -167,9 +166,11 @@ public class AutoExtinguish extends Module {
     }
 
     private void extinguishFire(BlockPos blockPos) {
-        mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, blockPos, net.minecraft.core.Direction.UP));
+        mc.getConnection().send(new ServerboundPlayerActionPacket(
+                ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, blockPos, net.minecraft.core.Direction.UP));
         mc.player.swing(InteractionHand.MAIN_HAND);
-        mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK, blockPos, net.minecraft.core.Direction.UP));
+        mc.getConnection().send(new ServerboundPlayerActionPacket(
+                ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK, blockPos, net.minecraft.core.Direction.UP));
     }
 
     private int findSlot(Item item) {

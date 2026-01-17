@@ -23,10 +23,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.equine.AbstractHorse;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.minecart.AbstractMinecartContainer;
+import net.minecraft.world.entity.vehicle.AbstractMinecartContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.meteordev.starscript.compiler.Compiler;
@@ -56,7 +56,8 @@ public class InteractionScreen extends Screen {
     private final Map<String, Consumer<Entity>> functions;
     private final Map<String, String> msgs;
 
-    private final net.minecraft.resources.Identifier GUI_ICONS_TEXTURE = net.minecraft.resources.Identifier.parse("textures/gui/icons.png");
+    private final net.minecraft.resources.ResourceLocation GUI_ICONS_TEXTURE = net.minecraft.resources.ResourceLocation
+            .parse("textures/gui/icons.png");
 
     private final StaticListener shiftListener = new StaticListener();
 
@@ -73,7 +74,8 @@ public class InteractionScreen extends Screen {
 
     public InteractionScreen(Entity entity, InteractionMenu module) {
         super(Component.literal("Menu Screen"));
-        if (module == null) closeScreen();
+        if (module == null)
+            closeScreen();
 
         selectedDotColor = module.selectedDotColor.get().getPacked();
         dotColor = module.dotColor.get().getPacked();
@@ -95,16 +97,21 @@ public class InteractionScreen extends Screen {
             case AbstractHorse abstractHorseEntity -> functions.put("Open Inventory", (Entity e) -> {
                 closeScreen();
                 if (minecraft.player.isHandsBusy()) {
-//                    client.player.networkHandler.sendPacket(new PlayerInputC2SPacket(0, 0, false, true));
-                    minecraft.player.connection.send(new ServerboundPlayerInputPacket(new net.minecraft.world.entity.player.Input(false, false, false, false, false, true, false)));
+                    // client.player.networkHandler.sendPacket(new PlayerInputC2SPacket(0, 0, false,
+                    // true));
+                    minecraft.player.connection
+                            .send(new ServerboundPlayerInputPacket(new net.minecraft.world.entity.player.Input(false,
+                                    false, false, false, false, true, false)));
 
                 }
-                minecraft.player.connection.send(ServerboundInteractPacket.createInteractionPacket(entity, true, InteractionHand.MAIN_HAND));
+                minecraft.player.connection.send(
+                        ServerboundInteractPacket.createInteractionPacket(entity, true, InteractionHand.MAIN_HAND));
                 minecraft.player.setShiftKeyDown(false);
             });
             case AbstractMinecartContainer storageMinecartEntity -> functions.put("Open Inventory", (Entity e) -> {
                 closeScreen();
-                minecraft.player.connection.send(ServerboundInteractPacket.createInteractionPacket(entity, true, InteractionHand.MAIN_HAND));
+                minecraft.player.connection.send(
+                        ServerboundInteractPacket.createInteractionPacket(entity, true, InteractionHand.MAIN_HAND));
             });
             case null, default -> functions.put("Open Inventory", (Entity e) -> {
                 closeScreen();
@@ -152,13 +159,14 @@ public class InteractionScreen extends Screen {
                 interactionMenuEntity = e;
                 var result = Parser.parse(msgs.get(key));
                 if (result.hasErrors()) {
-                    for (Error error : result.errors) MeteorStarscript.printChatError(error);
+                    for (Error error : result.errors)
+                        MeteorStarscript.printChatError(error);
                     return;
                 }
                 var script = Compiler.compile(result);
                 try {
                     var section = MeteorStarscript.ss.run(script);
-                    minecraft.setScreen(new ChatScreen(section.text, false));
+                    minecraft.setScreen(new ChatScreen(section.text));
                 } catch (StarscriptError err) {
                     MeteorStarscript.printChatError(err);
                 }
@@ -171,7 +179,7 @@ public class InteractionScreen extends Screen {
 
     private ItemStack[] getInventory(Entity e) {
         ItemStack[] stack = new ItemStack[27];
-        final int[] index = {0};
+        final int[] index = { 0 };
         if (e instanceof EnderMan) {
             try {
                 stack[index[0]] = ((EnderMan) e).getCarriedBlock().getBlock().asItem().getDefaultInstance();
@@ -188,7 +196,8 @@ public class InteractionScreen extends Screen {
         }
 
         // Hand items
-        for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[]{net.minecraft.world.entity.EquipmentSlot.MAINHAND, net.minecraft.world.entity.EquipmentSlot.OFFHAND}) {
+        for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[] {
+                net.minecraft.world.entity.EquipmentSlot.MAINHAND, net.minecraft.world.entity.EquipmentSlot.OFFHAND }) {
             ItemStack itemStack = a.getItemBySlot(slot);
             if (itemStack != null && !itemStack.isEmpty()) {
                 stack[index[0]] = itemStack;
@@ -197,7 +206,9 @@ public class InteractionScreen extends Screen {
         }
 
         // Armor items
-        for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[]{net.minecraft.world.entity.EquipmentSlot.FEET, net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.HEAD}) {
+        for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[] {
+                net.minecraft.world.entity.EquipmentSlot.FEET, net.minecraft.world.entity.EquipmentSlot.LEGS,
+                net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.HEAD }) {
             ItemStack itemStack = a.getItemBySlot(slot);
             if (itemStack != null && !itemStack.isEmpty()) {
                 stack[index[0]] = itemStack;
@@ -205,7 +216,8 @@ public class InteractionScreen extends Screen {
             }
         }
 
-        for (int i = index[0]; i < 27; i++) stack[i] = Items.AIR.getDefaultInstance();
+        for (int i = index[0]; i < 27; i++)
+            stack[i] = Items.AIR.getDefaultInstance();
         return stack;
     }
 
@@ -220,8 +232,9 @@ public class InteractionScreen extends Screen {
         KeyMapping.releaseAll();
         double x = (double) this.minecraft.getWindow().getScreenWidth() / 2;
         double y = (double) this.minecraft.getWindow().getScreenHeight() / 2;
-        // InputUtil.setCursorParameters(this.client.getWindow().getHandle(), mode, x, y);
-        InputConstants.grabOrReleaseMouse(this.minecraft.getWindow(), mode, x, y);
+        // InputUtil.setCursorParameters(this.client.getWindow().getHandle(), mode, x,
+        // y);
+        InputConstants.grabOrReleaseMouse(this.minecraft.getWindow().getWindow(), mode, x, y);
     }
 
     public void tick() {
@@ -248,11 +261,13 @@ public class InteractionScreen extends Screen {
 
     public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         // Draw crosshair icon (simplified - using drawTexture instead)
-        // context.drawGuiTexture(GUI_ICONS_TEXTURE, crosshairX - 8, crosshairY - 8, 0, 0, 15, 15);
+        // context.drawGuiTexture(GUI_ICONS_TEXTURE, crosshairX - 8, crosshairY - 8, 0,
+        // 0, 15, 15);
 
         drawDots(context, (int) (Math.min(height, width) / 2 * 0.75), mouseX, mouseY);
 
-        // Draw entity name (without scaling, as Matrix3x2fStack doesn't support push/pop/scale in 3D)
+        // Draw entity name (without scaling, as Matrix3x2fStack doesn't support
+        // push/pop/scale in 3D)
         context.drawCenteredString(font, entity.getName(), width / 2, 12, 0xFFFFFFFF);
 
         Vector2f mouse = getMouseVecs(mouseX, mouseY);
@@ -271,7 +286,8 @@ public class InteractionScreen extends Screen {
         Vector2f center = new Vector2f(width / 2, height / 2);
         mouse.sub(center).normalize();
 
-        if (scale == 0) scale = 4;
+        if (scale == 0)
+            scale = 4;
 
         // Move crossHair based on distance between mouse and center. But with limit
         if (Math.hypot(width / 2 - mouseX, height / 2 - mouseY) < 1f / scale * 200f)
@@ -305,7 +321,8 @@ public class InteractionScreen extends Screen {
             i++;
         }
 
-        // Go through all point and if it is focused -> drawing different color, changing closest string value
+        // Go through all point and if it is focused -> drawing different color,
+        // changing closest string value
         for (int j = 0; j < functions.size(); j++) {
             Point point = pointList.get(j);
             if (pointList.get(focusedDot) == point) {
@@ -316,7 +333,8 @@ public class InteractionScreen extends Screen {
         }
     }
 
-    private void drawRect(GuiGraphics context, int startX, int startY, int width, int height, int colorInner, int colorOuter) {
+    private void drawRect(GuiGraphics context, int startX, int startY, int width, int height, int colorInner,
+            int colorOuter) {
         context.hLine(startX, startX + width, startY, colorOuter);
         context.hLine(startX, startX + width, startY + height, colorOuter);
         context.vLine(startX, startY, startY + height, colorOuter);
@@ -354,7 +372,7 @@ public class InteractionScreen extends Screen {
     private class StaticListener {
         @EventHandler
         private void onKey(KeyEvent event) {
-            if (event.key() == minecraft.options.keyShift.getDefaultKey().getValue()) {
+            if (event.key == minecraft.options.keyShift.getDefaultKey().getValue()) {
                 minecraft.setCameraEntity(minecraft.player);
                 event.cancel();
                 MeteorClient.EVENT_BUS.unsubscribe(this);

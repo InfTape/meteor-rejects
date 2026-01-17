@@ -22,47 +22,46 @@ public class BungeeCordSpoof extends Module {
             .name("whitelist")
             .description("Use whitelist.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
 
     private final Setting<List<String>> whitelistedServers = sgGeneral.add(new StringListSetting.Builder()
             .name("whitelisted-servers")
             .description("Will only work if you joined the servers above.")
             .visible(whitelist::get)
-            .build()
-    );
+            .build());
 
     private final Setting<Boolean> spoofProfile = sgGeneral.add(new BoolSetting.Builder()
             .name("spoof-profile")
             .description("Spoof account profile.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
 
     private final Setting<String> forwardedIP = sgGeneral.add(new StringSetting.Builder()
             .name("forwarded-IP")
             .description("The forwarded IP address.")
             .defaultValue("127.0.0.1")
-            .build()
-    );
+            .build());
 
     public BungeeCordSpoof() {
-        super(MeteorRejectsAddon.CATEGORY, "bungeeCord-spoof", "Let you join BungeeCord servers, useful when bypassing proxies.");
+        super(MeteorRejectsAddon.CATEGORY, "bungeeCord-spoof",
+                "Let you join BungeeCord servers, useful when bypassing proxies.");
         runInMainMenu = true;
     }
 
     @EventHandler
     private void onPacketSend(PacketEvent.Send event) {
         if (event.packet instanceof ClientIntentionPacket packet && packet.intention() == ClientIntent.LOGIN) {
-            if (whitelist.get() && !whitelistedServers.get().contains(Utils.getWorldName())) return;
-            String address = packet.hostName() + "\0" + forwardedIP + "\0" + mc.getUser().getProfileId().toString().replace("-", "")
+            if (whitelist.get() && !whitelistedServers.get().contains(Utils.getWorldName()))
+                return;
+            String address = packet.hostName() + "\0" + forwardedIP + "\0"
+                    + mc.getUser().getProfileId().toString().replace("-", "")
                     + (spoofProfile.get() ? getProperty() : "");
             ((HandshakeC2SPacketAccessor) (Object) packet).setHostName(address);
         }
     }
 
     private String getProperty() {
-        PropertyMap propertyMap = mc.getGameProfile().properties();
+        PropertyMap propertyMap = mc.getGameProfile().getProperties();
         return "\0" + GSON.toJson(propertyMap.values().toArray());
     }
 }

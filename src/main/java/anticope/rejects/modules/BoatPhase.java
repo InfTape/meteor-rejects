@@ -11,7 +11,7 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.phys.Vec3;
 
 public class BoatPhase extends Module {
@@ -22,29 +22,25 @@ public class BoatPhase extends Module {
             .name("lock-boat-yaw")
             .description("Locks boat yaw to the direction you're facing.")
             .defaultValue(true)
-            .build()
-    );
+            .build());
 
     private final Setting<Boolean> verticalControl = sgGeneral.add(new BoolSetting.Builder()
             .name("vertical-control")
             .description("Whether or not space/ctrl can be used to move vertically.")
             .defaultValue(true)
-            .build()
-    );
+            .build());
 
     private final Setting<Boolean> adjustHorizontalSpeed = sgGeneral.add(new BoolSetting.Builder()
             .name("adjust-horizontal-speed")
             .description("Whether or not horizontal speed is modified.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
 
     private final Setting<Boolean> fall = sgGeneral.add(new BoolSetting.Builder()
             .name("fall")
             .description("Toggles vertical glide.")
             .defaultValue(false)
-            .build()
-    );
+            .build());
 
     private final Setting<Double> horizontalSpeed = sgSpeeds.add(new DoubleSetting.Builder()
             .name("horizontal-speed")
@@ -52,8 +48,7 @@ public class BoatPhase extends Module {
             .defaultValue(10)
             .min(0)
             .sliderMax(50)
-            .build()
-    );
+            .build());
 
     private final Setting<Double> verticalSpeed = sgSpeeds.add(new DoubleSetting.Builder()
             .name("vertical-speed")
@@ -61,8 +56,7 @@ public class BoatPhase extends Module {
             .defaultValue(5)
             .min(0)
             .sliderMax(20)
-            .build()
-    );
+            .build());
 
     private final Setting<Double> fallSpeed = sgSpeeds.add(new DoubleSetting.Builder()
             .name("fall-speed")
@@ -70,8 +64,7 @@ public class BoatPhase extends Module {
             .defaultValue(0.625)
             .min(0)
             .sliderMax(10)
-            .build()
-    );
+            .build());
 
     private Boat boat = null;
 
@@ -82,7 +75,8 @@ public class BoatPhase extends Module {
     @Override
     public void onActivate() {
         boat = null;
-        if (Modules.get().isActive(BoatGlitch.class)) Modules.get().get(BoatGlitch.class).toggle();
+        if (Modules.get().isActive(BoatGlitch.class))
+            Modules.get().get(BoatGlitch.class).toggle();
     }
 
     @Override
@@ -101,11 +95,12 @@ public class BoatPhase extends Module {
                 }
                 boat = (Boat) mc.player.getVehicle();
             }
-        } else boat = null;
+        } else
+            boat = null;
 
         if (boat != null) {
             boat.noPhysics = true;
-            //boat.pushSpeedReduction = 1;
+            // boat.pushSpeedReduction = 1;
 
             if (lockYaw.get()) {
                 boat.setYRot(mc.player.getYRot());
@@ -115,8 +110,7 @@ public class BoatPhase extends Module {
 
             if (adjustHorizontalSpeed.get()) {
                 vel = PlayerUtils.getHorizontalVelocity(horizontalSpeed.get());
-            }
-            else {
+            } else {
                 vel = boat.getDeltaMovement();
             }
 
@@ -125,12 +119,16 @@ public class BoatPhase extends Module {
             double velZ = vel.z;
 
             if (verticalControl.get()) {
-                if (mc.options.keyJump.isDown()) velY += verticalSpeed.get() / 20;
-                if (mc.options.keySprint.isDown()) velY -= verticalSpeed.get() / 20;
-                else if (fall.get()) velY -= fallSpeed.get() / 20;
-            } else if (fall.get()) velY -= fallSpeed.get() / 20;
+                if (mc.options.keyJump.isDown())
+                    velY += verticalSpeed.get() / 20;
+                if (mc.options.keySprint.isDown())
+                    velY -= verticalSpeed.get() / 20;
+                else if (fall.get())
+                    velY -= fallSpeed.get() / 20;
+            } else if (fall.get())
+                velY -= fallSpeed.get() / 20;
 
-            ((IVec3d) boat.getDeltaMovement()).meteor$set(velX,velY,velZ);
+            ((IVec3d) boat.getDeltaMovement()).meteor$set(velX, velY, velZ);
         }
     }
 }

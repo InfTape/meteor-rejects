@@ -27,7 +27,8 @@ import java.util.*;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class CustomYggdrasilLogin {
-    public static Environment localYggdrasilApi = new Environment("/authserver", "/sessionserver", "/minecraftservices", "Custom-Yggdrasil");
+    public static Environment localYggdrasilApi = new Environment("/sessionserver", "/minecraftservices",
+            "Custom-Yggdrasil");
 
     public static User login(String name, String password, String server) throws AuthenticationException {
         try {
@@ -49,7 +50,7 @@ public class CustomYggdrasilLogin {
             String token = json.get("accessToken").getAsString();
             UUID uuid = UUID.fromString(json.get("selectedProfile").getAsJsonObject().get("id").getAsString());
             String username = json.get("selectedProfile").getAsJsonObject().get("name").getAsString();
-            return new User(username, uuid, token, Optional.empty(), Optional.empty());
+            return new User(username, uuid, token, Optional.empty(), Optional.empty(), User.Type.MSA);
         } catch (Exception e) {
             throw new AuthenticationException(e);
         }
@@ -91,7 +92,7 @@ public class CustomYggdrasilLogin {
         @Override
         public MinecraftProfileTextures unpackTextures(final Property packedTextures) {
             final String value = packedTextures.value();
-            final SignatureState signatureState =  getPropertySignatureState(packedTextures);
+            final SignatureState signatureState = getPropertySignatureState(packedTextures);
 
             final MinecraftTexturesPayload result;
             try {
@@ -112,8 +113,7 @@ public class CustomYggdrasilLogin {
                     textures.get(MinecraftProfileTexture.Type.SKIN),
                     textures.get(MinecraftProfileTexture.Type.CAPE),
                     textures.get(MinecraftProfileTexture.Type.ELYTRA),
-                    signatureState
-            );
+                    signatureState);
         }
     }
 

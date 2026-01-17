@@ -16,8 +16,7 @@ import net.minecraft.network.protocol.status.ClientStatusPacketListener;
 import net.minecraft.network.protocol.status.ClientboundStatusResponsePacket;
 import net.minecraft.network.protocol.status.ServerStatus;
 import net.minecraft.network.protocol.status.ServerboundStatusRequestPacket;
-import net.minecraft.server.network.EventLoopGroupHolder;
-import net.minecraft.util.Util;
+
 import net.minecraft.util.debugchart.LocalSampleLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -58,14 +57,14 @@ public class ServerListPinger {
         }
     }
 
-
     public void add(final MServerInfo entry, final Runnable runnable) throws UnknownHostException {
         ServerAddress serverAddress = ServerAddress.parseString(entry.address);
-        Optional<InetSocketAddress> address = ServerNameResolver.DEFAULT.resolveAddress(serverAddress).map(ResolvedServerAddress::asInetSocketAddress);
+        Optional<InetSocketAddress> address = ServerNameResolver.DEFAULT.resolveAddress(serverAddress)
+                .map(ResolvedServerAddress::asInetSocketAddress);
         if (address.isEmpty()) {
             return;
         }
-        final Connection clientConnection = Connection.connectToServer(address.get(), EventLoopGroupHolder.remote(false), (LocalSampleLogger) null);
+        final Connection clientConnection = Connection.connectToServer(address.get(), false, (LocalSampleLogger) null);
 
         failedToConnect = false;
         this.clientConnections.add(clientConnection);
@@ -90,7 +89,8 @@ public class ServerListPinger {
                     entry.label = "";
                 }
 
-                entry.version = serverMetadata.version().map(ServerStatus.Version::name).orElse("multiplayer.status.old");
+                entry.version = serverMetadata.version().map(ServerStatus.Version::name)
+                        .orElse("multiplayer.status.old");
                 serverMetadata.players().ifPresentOrElse(players -> {
                     entry.playerCountLabel = ServerListPinger.getPlayerCountLabel(players.online(), players.max());
                     entry.playerCount = players.online();
@@ -99,15 +99,15 @@ public class ServerListPinger {
                     entry.playerCountLabel = "multiplayer.status.unknown";
                 });
 
-                this.startTime = Util.getMillis();
+                this.startTime = System.currentTimeMillis();
                 clientConnection.send(new ServerboundPingRequestPacket(this.startTime));
                 this.sentQuery = true;
                 notifyDisconnectListeners();
-                }
+            }
 
             public void handlePongResponse(ClientboundPongResponsePacket packet) {
                 long l = this.startTime;
-                long m = Util.getMillis();
+                long m = System.currentTimeMillis();
                 entry.ping = m - l;
                 clientConnection.disconnect(Component.translatable("multiplayer.status.finished"));
             }
@@ -135,7 +135,8 @@ public class ServerListPinger {
         };
 
         try {
-            clientConnection.initiateServerboundStatusConnection(serverAddress.getHost(), serverAddress.getPort(), clientQueryPacketListener);
+            clientConnection.initiateServerboundStatusConnection(serverAddress.getHost(), serverAddress.getPort(),
+                    clientQueryPacketListener);
             clientConnection.send(ServerboundStatusRequestPacket.INSTANCE);
         } catch (Throwable var8) {
             LOGGER.error("Failed to ping server {}", serverAddress, var8);
@@ -145,21 +146,28 @@ public class ServerListPinger {
 
     private void ping(final MServerInfo serverInfo) {
         final ServerAddress serverAddress = ServerAddress.parseString(serverInfo.address);
-        EventLoopGroupHolder backend = EventLoopGroupHolder.remote(false);
-        new Bootstrap().group(backend.eventLoopGroup()).handler(new ChannelInitializer<>() {
-            @Override
-            protected void initChannel(Channel ch) throws Exception {
-                try {
-                    ch.config().setOption(ChannelOption.TCP_NODELAY, true);
-                } catch (ChannelException ignored) {
-                }
-                ch.pipeline().addLast(new LegacyServerPinger(serverAddress, ((protocolVersion, version, label, currentPlayers, maxPlayers) -> {
-                    serverInfo.version = version;
-                    serverInfo.label = label;
-                    serverInfo.playerCountLabel = ServerListPinger.getPlayerCountLabel(currentPlayers, maxPlayers);
-                })));
-            }
-        });
+        new Bootstrap()
+                .group(io.netty.channel.epoll.Epoll.isAvailable() ? new io.netty.channel.epoll.EpollEventLoopGroup()
+                        : new io.netty.channel.nio.NioEventLoopGroup())
+                .channel(
+                        io.netty.channel.epoll.Epoll.isAvailable() ? io.netty.channel.epoll.EpollSocketChannel.class
+                                : io.netty.channel.socket.nio.NioSocketChannel.class)
+                .handler(new ChannelInitializer<>() {
+                    @Override
+                    protected void initChannel(Channel ch) throws Exception {
+                        try {
+                            ch.config().setOption(ChannelOption.TCP_NODELAY, true);
+                        } catch (ChannelException ignored) {
+                        }
+                        ch.pipeline().addLast(new LegacyServerPinger(serverAddress,
+                                ((protocolVersion, version, label, currentPlayers, maxPlayers) -> {
+                                    serverInfo.version = version;
+                                    serverInfo.label = label;
+                                    serverInfo.playerCountLabel = ServerListPinger.getPlayerCountLabel(currentPlayers,
+                                            maxPlayers);
+                                })));
+                    }
+                });
     }
 
     public void tick() {
