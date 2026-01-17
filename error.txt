@@ -1,0 +1,472 @@
+> Task :compileJava FAILED
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\commands\GiveCommand.java:22: 错误: 找不到符号
+import net.minecraft.world.item.component.TypedEntityData;
+                                         ^
+  符号:   类 TypedEntityData
+  位置: 程序包 net.minecraft.world.item.component
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:26: 错误: 程序包net.minecraft.world.entity.animal.equine不存在
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
+                                               ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:29: 错误: 程序包net.minecraft.world.entity.vehicle.minecart不存在
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecartContainer;
+                                                  ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:59: 错误: 找不到符号
+    private final net.minecraft.resources.Identifier GUI_ICONS_TEXTURE = net.minecraft.resources.Identifier.parse("textures/gui/icons.png");
+                                         ^
+  符号:   类 Identifier
+  位置: 程序包 net.minecraft.resources
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\LegacyServerPinger.java:8: 错误: 找不到符号
+import net.minecraft.server.network.EventLoopGroupHolder;
+                                   ^
+  符号:   类 EventLoopGroupHolder
+  位置: 程序包 net.minecraft.server.network
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:19: 错误: 找不到符号
+import net.minecraft.server.network.EventLoopGroupHolder;
+                                   ^
+  符号:   类 EventLoopGroupHolder
+  位置: 程序包 net.minecraft.server.network
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:20: 错误: 找不到符号
+import net.minecraft.util.Util;
+                         ^
+  符号:   类 Util
+  位置: 程序包 net.minecraft.util
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\Deadmau5FeatureRendererMixin.java:5: 错误: 找不到符号
+import net.minecraft.client.renderer.SubmitNodeCollector;
+                                    ^
+  符号:   类 SubmitNodeCollector
+  位置: 程序包 net.minecraft.client.renderer
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\Deadmau5FeatureRendererMixin.java:7: 错误: 找不到符号
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+                                                 ^
+  符号:   类 AvatarRenderState
+  位置: 程序包 net.minecraft.client.renderer.entity.state
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\Deadmau5FeatureRendererMixin.java:16: 错误: 找不到符号
+    private void onRender(com.mojang.blaze3d.vertex.PoseStack matrixStack, SubmitNodeCollector queue, int light, AvatarRenderState renderState, float limbAngle, float limbDistance, CallbackInfo ci) {
+                                                                           ^
+  符号:   类 SubmitNodeCollector
+  位置: 类 Deadmau5FeatureRendererMixin
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\Deadmau5FeatureRendererMixin.java:16: 错误: 找不到符号
+    private void onRender(com.mojang.blaze3d.vertex.PoseStack matrixStack, SubmitNodeCollector queue, int light, AvatarRenderState renderState, float limbAngle, float limbDistance, CallbackInfo ci) {
+                                                                                                                 ^
+  符号:   类 AvatarRenderState
+  位置: 类 Deadmau5FeatureRendererMixin
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\LivingEntityRendererMixin.java:11: 错误: 找不到符号
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+                                                 ^
+  符号:   类 AvatarRenderState
+  位置: 程序包 net.minecraft.client.renderer.entity.state
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:13: 错误: 程序包net.minecraft.world.attribute不存在
+import net.minecraft.world.attribute.BedRule;
+                                    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:14: 错误: 程序包net.minecraft.world.attribute不存在
+import net.minecraft.world.attribute.EnvironmentAttributeMap;
+                                    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:15: 错误: 程序包net.minecraft.world.attribute不存在
+import net.minecraft.world.attribute.EnvironmentAttributes;
+                                    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:18: 错误: 找不到符号
+import net.minecraft.resources.Identifier;
+                              ^
+  符号:   类 Identifier
+  位置: 程序包 net.minecraft.resources
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:20: 错误: 程序包net.minecraft.world.attribute不存在
+import net.minecraft.world.attribute.EnvironmentAttributes;
+                                    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoSoup.java:15: 错误: 程序包net.minecraft.world.entity.npc.villager不存在
+import net.minecraft.world.entity.npc.villager.Villager;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatGlitch.java:17: 错误: 程序包net.minecraft.world.entity.vehicle.boat不存在
+import net.minecraft.world.entity.vehicle.boat.Boat;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatPhase.java:14: 错误: 程序包net.minecraft.world.entity.vehicle.boat不存在
+import net.minecraft.world.entity.vehicle.boat.Boat;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatPhase.java:76: 错误: 找不到符号
+    private Boat boat = null;
+            ^
+  符号:   类 Boat
+  位置: 类 BoatPhase
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\KnockbackPlus.java:19: 错误: 程序包org.jspecify.annotations不存在
+import org.jspecify.annotations.NonNull;
+                               ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ObsidianFarm.java:13: 错误: 程序包net.minecraft.world.attribute不存在
+import net.minecraft.world.attribute.EnvironmentAttributes;
+                                    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\Rendering.java:11: 错误: 找不到符号
+import net.minecraft.resources.Identifier;
+                              ^
+  符号:   类 Identifier
+  位置: 程序包 net.minecraft.resources
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ShieldBypass.java:5: 错误: 找不到符号
+import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
+                                                   ^
+  符号:   类 MouseClickEvent
+  位置: 程序包 meteordevelopment.meteorclient.events.meteor
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ShieldBypass.java:41: 错误: 找不到符号
+    private void onMouseButton(MouseClickEvent event) {
+                               ^
+  符号:   类 MouseClickEvent
+  位置: 类 ShieldBypass
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\VehicleOneHit.java:12: 错误: 程序包net.minecraft.world.entity.vehicle.boat不存在
+import net.minecraft.world.entity.vehicle.boat.Boat;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\VehicleOneHit.java:13: 错误: 程序包net.minecraft.world.entity.vehicle.minecart不存在
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+                                                  ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\GiveUtils.java:15: 错误: 找不到符号
+import net.minecraft.resources.Identifier;
+                              ^
+  符号:   类 Identifier
+  位置: 程序包 net.minecraft.resources
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\GiveUtils.java:46: 错误: 找不到符号
+    private static final List<Identifier> HIDDEN_ENTITIES = Arrays.asList(
+                              ^
+  符号:   类 Identifier
+  位置: 类 GiveUtils
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\WorldGenUtils.java:23: 错误: 程序包net.minecraft.world.entity.animal.golem不存在
+import net.minecraft.world.entity.animal.golem.IronGolem;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\WorldGenUtils.java:29: 错误: 程序包net.minecraft.world.entity.monster.illager不存在
+import net.minecraft.world.entity.monster.illager.Evoker;
+                                                 ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\WorldGenUtils.java:31: 错误: 程序包net.minecraft.world.entity.monster.skeleton不存在
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+                                                  ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\WorldGenUtils.java:32: 错误: 程序包net.minecraft.world.entity.npc.villager不存在
+import net.minecraft.world.entity.npc.villager.Villager;
+                                              ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\WorldGenUtils.java:33: 错误: 程序包net.minecraft.world.entity.vehicle.minecart不存在
+import net.minecraft.world.entity.vehicle.minecart.MinecartChest;
+                                                  ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\commands\GiveCommand.java:107: 错误: 找不到符号
+                    .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.WITHER, tag))
+                                                     ^
+  符号:   变量 TypedEntityData
+  位置: 类 GiveCommand
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\commands\GiveCommand.java:121: 错误: 找不到符号
+                    .set(DataComponents.PROFILE, net.minecraft.world.item.component.ResolvableProfile.createResolved(new GameProfile(getUUID(playerName), playerName)))
+                                                                                                     ^
+  符号:   方法 createResolved(GameProfile)
+  位置: 类 ResolvableProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\commands\GiveCommand.java:154: 错误: 找不到符号
+                .set(DataComponents.ENTITY_DATA, TypedEntityData.of(EntityType.ARMOR_STAND, tag))
+                                                 ^
+  符号:   变量 TypedEntityData
+  位置: 类 GiveCommand
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\commands\SaveSkinCommand.java:47: 错误: 找不到符号
+            UUID id = PlayerListEntryArgumentType.get(ctx).getProfile().id();
+                                                                       ^
+  符号:   方法 id()
+  位置: 类 GameProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:59: 错误: 找不到符号
+    private final net.minecraft.resources.Identifier GUI_ICONS_TEXTURE = net.minecraft.resources.Identifier.parse("textures/gui/icons.png");
+                                                                                                ^
+  符号:   类 Identifier
+  位置: 程序包 net.minecraft.resources
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:95: 错误: 找不到符号
+            case AbstractHorse abstractHorseEntity -> functions.put("Open Inventory", (Entity e) -> {
+                 ^
+  符号:   类 AbstractHorse
+  位置: 类 InteractionScreen
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:105: 错误: 找不到符号
+            case AbstractMinecartContainer storageMinecartEntity -> functions.put("Open Inventory", (Entity e) -> {
+                 ^
+  符号:   类 AbstractMinecartContainer
+  位置: 类 InteractionScreen
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:161: 错误: 无法将类 ChatScreen中的构造器 ChatScreen应用到给定类型;
+                    minecraft.setScreen(new ChatScreen(section.text, false));
+                                        ^
+  需要: String
+  找到:    String,boolean
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:224: 错误: 不兼容的类型: Window无法转换为long
+        InputConstants.grabOrReleaseMouse(this.minecraft.getWindow(), mode, x, y);
+                                                                  ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\screens\InteractionScreen.java:357: 错误: 找不到符号
+            if (event.key() == minecraft.options.keyShift.getDefaultKey().getValue()) {
+                     ^
+  符号:   方法 key()
+  位置: 类型为KeyEvent的变量 event
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\LegacyServerPinger.java:32: 错误: 找不到符号
+            pinger.pingServer(server, () -> {}, () -> {}, EventLoopGroupHolder.remote(false));
+                                                          ^
+  符号:   变量 EventLoopGroupHolder
+  位置: 类 LegacyServerPinger
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:68: 错误: 找不到符号
+        final Connection clientConnection = Connection.connectToServer(address.get(), EventLoopGroupHolder.remote(false), (LocalSampleLogger) null);
+                                                                                      ^
+  符号:   变量 EventLoopGroupHolder
+  位置: 类 ServerListPinger
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:102: 错误: 找不到符号
+                this.startTime = Util.getMillis();
+                                 ^
+  符号: 变量 Util
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:110: 错误: 找不到符号
+                long m = Util.getMillis();
+                         ^
+  符号: 变量 Util
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:148: 错误: 找不到符号
+        EventLoopGroupHolder backend = EventLoopGroupHolder.remote(false);
+        ^
+  符号:   类 EventLoopGroupHolder
+  位置: 类 ServerListPinger
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\server\ServerListPinger.java:148: 错误: 找不到符号
+        EventLoopGroupHolder backend = EventLoopGroupHolder.remote(false);
+                                       ^
+  符号:   变量 EventLoopGroupHolder
+  位置: 类 ServerListPinger
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\themes\rounded\MeteorRoundedGuiTheme.java:289: 错误: 方法不会覆盖或实现超类型的方法
+    @Override
+    ^
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\gui\themes\rounded\widgets\WMeteorTopBar.java:74: 错误: 找不到符号
+                glfwSetCursorPos(mc.getWindow().handle(), mouseX, mouseY);
+                                               ^
+  符号:   方法 handle()
+  位置: 类 Window
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\mixin\LivingEntityRendererMixin.java:27: 错误: 找不到符号
+        if ((!(state instanceof AvatarRenderState)) && renderingModule.dinnerboneEnabled()) {
+                                ^
+  符号:   类 AvatarRenderState
+  位置: 类 LivingEntityRendererMixin<T,S,M>
+  其中, T,S,M是类型变量:
+    T扩展已在类 LivingEntityRendererMixin中声明的LivingEntity
+    S扩展已在类 LivingEntityRendererMixin中声明的LivingEntityRenderState
+    M扩展已在类 LivingEntityRendererMixin中声明的EntityModel<? super S>
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:54: 错误: 找不到符号
+            if (packet.getMovement().x > 30_000_000 || packet.getMovement().y > 30_000_000 || packet.getMovement().z > 30_000_000
+                      ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:54: 错误: 找不到符号
+            if (packet.getMovement().x > 30_000_000 || packet.getMovement().y > 30_000_000 || packet.getMovement().z > 30_000_000
+                                                             ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:54: 错误: 找不到符号
+            if (packet.getMovement().x > 30_000_000 || packet.getMovement().y > 30_000_000 || packet.getMovement().z > 30_000_000
+                                                                                                    ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:55: 错误: 找不到符号
+                    || packet.getMovement().x < -30_000_000 || packet.getMovement().y  < -30_000_000 || packet.getMovement().z < -30_000_000
+                             ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:55: 错误: 找不到符号
+                    || packet.getMovement().x < -30_000_000 || packet.getMovement().y  < -30_000_000 || packet.getMovement().z < -30_000_000
+                                                                     ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiCrash.java:55: 错误: 找不到符号
+                    || packet.getMovement().x < -30_000_000 || packet.getMovement().y  < -30_000_000 || packet.getMovement().z < -30_000_000
+                                                                                                              ^
+  符号:   方法 getMovement()
+  位置: 类型为ClientboundSetEntityMotionPacket的变量 packet
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:41: 错误: 找不到符号
+        EnvironmentAttributeMap attributes = mc.level.dimensionType().attributes();
+        ^
+  符号:   类 EnvironmentAttributeMap
+  位置: 类 AntiSpawnpoint
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:41: 错误: 找不到符号
+        EnvironmentAttributeMap attributes = mc.level.dimensionType().attributes();
+                                                                     ^
+  符号:   方法 attributes()
+  位置: 类 DimensionType
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:42: 错误: 找不到符号
+        boolean IsOverWorld = attributes.applyModifier(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK) != BedRule.CAN_SLEEP_WHEN_DARK;
+                                                       ^
+  符号:   变量 EnvironmentAttributes
+  位置: 类 AntiSpawnpoint
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:42: 错误: 找不到符号
+        boolean IsOverWorld = attributes.applyModifier(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK) != BedRule.CAN_SLEEP_WHEN_DARK;
+                                                                                       ^
+  符号:   变量 BedRule
+  位置: 类 AntiSpawnpoint
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:42: 错误: 找不到符号
+        boolean IsOverWorld = attributes.applyModifier(EnvironmentAttributes.BED_RULE, BedRule.CAN_SLEEP_WHEN_DARK) != BedRule.CAN_SLEEP_WHEN_DARK;
+                                                                                                                       ^
+  符号:   变量 BedRule
+  位置: 类 AntiSpawnpoint
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiSpawnpoint.java:43: 错误: 找不到符号
+        boolean IsNetherWorld = attributes.applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false);
+                                                         ^
+  符号:   变量 EnvironmentAttributes
+  位置: 类 AntiSpawnpoint
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiVanish.java:125: 错误: 找不到符号
+                playerCache = mc.getConnection().getOnlinePlayers().stream().collect(Collectors.toMap(e -> e.getProfile().id(), e -> e.getProfile().name()));
+                                                                                                                         ^
+  符号:   方法 id()
+  位置: 类 GameProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AntiVanish.java:125: 错误: 找不到符号
+                playerCache = mc.getConnection().getOnlinePlayers().stream().collect(Collectors.toMap(e -> e.getProfile().id(), e -> e.getProfile().name()));
+                                                                                                                                                   ^
+  符号:   方法 name()
+  位置: 类 GameProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:86: 错误: 找不到符号
+    private static final MobEffect FIRE_RESISTANCE = BuiltInRegistries.MOB_EFFECT.getValue(Identifier.parse("fire_resistance"));
+                                                                                           ^
+  符号:   变量 Identifier
+  位置: 类 AutoExtinguish
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:94: 错误: 找不到符号
+        if (mc.level.dimensionType().attributes().applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)) {
+                                                                ^
+  符号:   变量 EnvironmentAttributes
+  位置: 类 AutoExtinguish
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:94: 错误: 找不到符号
+        if (mc.level.dimensionType().attributes().applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)) {
+                                    ^
+  符号:   方法 attributes()
+  位置: 类 DimensionType
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:121: 错误: 找不到符号
+                    float yaw = mc.gameRenderer.getMainCamera().yRot() % 360;
+                                                               ^
+  符号:   方法 yRot()
+  位置: 类 Camera
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:122: 错误: 找不到符号
+                    float pitch = mc.gameRenderer.getMainCamera().xRot() % 360;
+                                                                 ^
+  符号:   方法 xRot()
+  位置: 类 Camera
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:158: 错误: 找不到符号
+            float yaw = mc.gameRenderer.getMainCamera().yRot() % 360;
+                                                       ^
+  符号:   方法 yRot()
+  位置: 类 Camera
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoExtinguish.java:159: 错误: 找不到符号
+            float pitch = mc.gameRenderer.getMainCamera().xRot() % 360;
+                                                         ^
+  符号:   方法 xRot()
+  位置: 类 Camera
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\AutoSoup.java:140: 错误: 找不到符号
+                return entity instanceof Villager
+                                         ^
+  符号:   类 Villager
+  位置: 类 AutoSoup
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatGlitch.java:123: 错误: 找不到符号
+        if (event.key() == mc.options.keyShift.getDefaultKey().getValue() && event.action == KeyAction.Press) {
+                 ^
+  符号:   方法 key()
+  位置: 类型为KeyEvent的变量 event
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatGlitch.java:124: 错误: 找不到符号
+            if (mc.player.getVehicle() != null && mc.player.getVehicle() instanceof Boat) {
+                                                                                    ^
+  符号:   类 Boat
+  位置: 类 BoatGlitch
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatPhase.java:97: 错误: 找不到符号
+        if (mc.player.getVehicle() != null && mc.player.getVehicle() instanceof Boat) {
+                                                                                ^
+  符号:   类 Boat
+  位置: 类 BoatPhase
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BoatPhase.java:102: 错误: 找不到符号
+                boat = (Boat) mc.player.getVehicle();
+                        ^
+  符号:   类 Boat
+  位置: 类 BoatPhase
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\BungeeCordSpoof.java:65: 错误: 找不到符号
+        PropertyMap propertyMap = mc.getGameProfile().properties();
+                                                     ^
+  符号:   方法 properties()
+  位置: 类 GameProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\GamemodeNotifier.java:37: 错误: 找不到符号
+                    info("Player %s changed gamemode to %s", entry1.getProfile().name(), entry.gameMode());
+                                                                                ^
+  符号:   方法 name()
+  位置: 类 GameProfile
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\KnockbackPlus.java:40: 错误: 找不到符号
+                public void onInteraction(@NonNull InteractionHand interactionHand) {
+                                           ^
+  符号: 类 NonNull
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\KnockbackPlus.java:44: 错误: 找不到符号
+                public void onInteraction(@NonNull InteractionHand interactionHand, @NonNull Vec3 vec3) {
+                                           ^
+  符号: 类 NonNull
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\KnockbackPlus.java:44: 错误: 找不到符号
+                public void onInteraction(@NonNull InteractionHand interactionHand, @NonNull Vec3 vec3) {
+                                                                                     ^
+  符号: 类 NonNull
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ObsidianFarm.java:39: 错误: 找不到符号
+        if (mc.level.dimensionType().attributes().applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)) {
+                                                                ^
+  符号:   变量 EnvironmentAttributes
+  位置: 类 ObsidianFarm
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ObsidianFarm.java:39: 错误: 找不到符号
+        if (mc.level.dimensionType().attributes().applyModifier(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)) {
+                                    ^
+  符号:   方法 attributes()
+  位置: 类 DimensionType
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\Rendering.java:92: 错误: 找不到符号
+        Identifier shaderID = Identifier.withDefaultNamespace(name);
+        ^
+  符号:   类 Identifier
+  位置: 类 Rendering
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\Rendering.java:92: 错误: 找不到符号
+        Identifier shaderID = Identifier.withDefaultNamespace(name);
+                              ^
+  符号:   变量 Identifier
+  位置: 类 Rendering
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\ShieldBypass.java:91: 错误: 找不到符号
+            mc.player.resetOnlyAttackStrengthTicker();
+                     ^
+  符号:   方法 resetOnlyAttackStrengthTicker()
+  位置: 类型为LocalPlayer的变量 player
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\SoundLocator.java:116: 错误: 找不到符号
+                if (sound.location().equals(event.sound.getIdentifier())) {
+                                                       ^
+  符号:   方法 getIdentifier()
+  位置: 类型为SoundInstance的变量 sound
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\SoundLocator.java:128: 错误: 找不到符号
+        WeighedSoundEvents soundSet = mc.getSoundManager().getSoundEvent(sound.getIdentifier());
+                                                                              ^
+  符号:   方法 getIdentifier()
+  位置: 类型为SoundInstance的变量 sound
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\SoundLocator.java:138: 错误: 找不到符号
+                    text = Component.literal(sound.getIdentifier().toString());
+                                                  ^
+  符号:   方法 getIdentifier()
+  位置: 类型为SoundInstance的变量 sound
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\VehicleOneHit.java:36: 错误: 找不到符号
+            || (!(ehr.getEntity() instanceof AbstractMinecart) && !(ehr.getEntity() instanceof Boat))
+                                             ^
+  符号:   类 AbstractMinecart
+  位置: 类 VehicleOneHit
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\modules\VehicleOneHit.java:36: 错误: 找不到符号
+            || (!(ehr.getEntity() instanceof AbstractMinecart) && !(ehr.getEntity() instanceof Boat))
+                                                                                               ^
+  符号:   类 Boat
+  位置: 类 VehicleOneHit
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\accounts\CustomYggdrasilAccount.java:43: 错误: 无法将类 Account<T>中的方法 applyLoginEnvironment应用到给定类型;
+            applyLoginEnvironment(service);
+            ^
+  需要: YggdrasilAuthenticationService,MinecraftSessionService
+  找到:    LocalYggdrasilAuthenticationService
+  原因: 实际参数列表和形式参数列表长度不同
+  其中, T是类型变量:
+    T扩展已在类 Account中声明的Account<?>
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\accounts\CustomYggdrasilLogin.java:30: 错误: 无法将记录 Environment中的构造器 Environment应用到给定类型;
+    public static Environment localYggdrasilApi = new Environment("/authserver", "/sessionserver", "/minecraftservices", "Custom-Yggdrasil");
+                                                  ^
+  需要: String,String,String
+  找到:    String,String,String,String
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\accounts\CustomYggdrasilLogin.java:52: 错误: 无法将类 User中的构造器 User应用到给定类型;
+            return new User(username, uuid, token, Optional.empty(), Optional.empty());
+                   ^
+  需要: String,UUID,String,Optional<String>,Optional<String>,Type
+  找到:    String,UUID,String,Optional<Object>,Optional<Object>
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\GiveUtils.java:47: 错误: 找不到符号
+        Identifier.parse("giant"),
+        ^
+  符号:   变量 Identifier
+  位置: 类 GiveUtils
+C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\utils\GiveUtils.java:48: 错误: 找不到符号
+        Identifier.parse("ender_dragon"),
+        ^
+  符号:   变量 Identifier
+  位置: 类 GiveUtils
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: C:\Users\sam\IdeaProjects\meteor-rejects\src\main\java\anticope\rejects\arguments\EnumArgumentType.java使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+注: 某些消息已经过简化; 请使用 -Xdiags:verbose 重新编译以获得完整输出
+100 个错误
